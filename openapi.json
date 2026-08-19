@@ -96,6 +96,64 @@
           }
         }
       }
+    },
+    "/garage/{id}": {
+      "get": {
+        "tags": ["Garage"],
+        "summary": "Get Car",
+        "description": "Возвращает JSON-данные об указанном автомобиле.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор автомобиля"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ. Возвращает данные об автомобиле.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Название автомобиля",
+                      "example": "Tesla"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Цвет автомобиля в HEX-формате",
+                      "example": "#e6e6fa"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "Уникальный идентификатор автомобиля",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Автомобиль с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
