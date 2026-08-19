@@ -217,6 +217,91 @@
           }
         }
       },
+      "put": {
+        "tags": ["Garage"],
+        "summary": "Update Car",
+        "description": "Обновляет атрибуты указанного автомобиля.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор автомобиля"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "color"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Новое название автомобиля",
+                    "example": "Car with new name"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Новый цвет автомобиля в HEX-формате",
+                    "example": "#ff00ff"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Автомобиль успешно обновлён. Возвращает обновлённые данные автомобиля.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Название автомобиля",
+                      "example": "Car with new name"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Цвет автомобиля в HEX-формате",
+                      "example": "#ff00ff"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "Уникальный идентификатор автомобиля",
+                      "example": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (например, отсутствуют обязательные поля или некорректный формат данных)"
+          },
+          "404": {
+            "description": "Автомобиль с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера"
+          }
+        }
+      },
       "delete": {
         "tags": ["Garage"],
         "summary": "Delete Car",
