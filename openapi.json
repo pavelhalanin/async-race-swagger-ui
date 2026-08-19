@@ -216,6 +216,49 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["Garage"],
+        "summary": "Delete Car",
+        "description": "Удаляет указанный автомобиль из гаража.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор автомобиля"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Автомобиль успешно удалён.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Автомобиль с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера"
+          }
+        }
       }
     }
   }
