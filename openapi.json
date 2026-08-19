@@ -403,36 +403,50 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["started", "stopped"]
+              "enum": ["started", "stopped", "drive"]
             },
-            "description": "Статус двигателя"
+            "description": "Статус двигателя: started - запуск, stopped - остановка, drive - режим движения"
           }
         ],
         "responses": {
           "200": {
-            "description": "Успешный ответ. Возвращает скорость и расстояние.",
+            "description": "Успешный ответ. Для статусов 'started'/'stopped' возвращает скорость и расстояние, для статуса 'drive' - успех.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "velocity": {
-                      "type": "number",
-                      "description": "Скорость автомобиля",
-                      "example": 64
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "velocity": {
+                          "type": "number",
+                          "description": "Скорость автомобиля",
+                          "example": 64
+                        },
+                        "distance": {
+                          "type": "number",
+                          "description": "Расстояние, которое проедет автомобиль",
+                          "example": 500000
+                        }
+                      }
                     },
-                    "distance": {
-                      "type": "number",
-                      "description": "Расстояние, которое проедет автомобиль",
-                      "example": 500000
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean",
+                          "description": "Успешность переключения в режим движения",
+                          "example": true
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
           },
           "400": {
-            "description": "Неверный запрос (например, некорректные параметры)",
+            "description": "Неверный запрос (некорректные параметры)",
             "content": {
               "application/json": {
                 "schema": {
@@ -443,12 +457,48 @@
             }
           },
           "404": {
-            "description": "Автомобиль с указанным ID не найден.",
+            "description": "Автомобиль с указанным ID не найден (для статусов 'started'/'stopped') или параметры двигателя не найдены (для статуса 'drive').",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "example": "Car with such id was not found in the garage."
+                  "examples": {
+                    "notFound": {
+                      "value": "Car with such id was not found in the garage."
+                    },
+                    "engineNotFound": {
+                      "value": "Engine parameters for car with such id was not found in the garage. Have you tried to set engine status to \"started\" before?"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Двигатель уже в режиме движения (только для статуса 'drive')",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Drive already in progress. You can't run drive for the same car twice while it's not stopped."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера. Для статуса 'drive' может означать, что двигатель внезапно сломался.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "examples": {
+                    "internalError": {
+                      "value": "Internal Server Error"
+                    },
+                    "engineBroken": {
+                      "value": "Car has been stopped suddenly. It's engine was broken down."
+                    }
+                  }
                 }
               }
             }
