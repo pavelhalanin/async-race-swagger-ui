@@ -744,6 +744,50 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["Winners"],
+        "summary": "Delete Winner",
+        "description": "Удаляет указанную запись о победителе из таблицы победителей.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#delete-winner"
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор победителя (ID автомобиля)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Запись о победителе успешно удалена.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Победитель с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
