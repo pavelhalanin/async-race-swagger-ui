@@ -23,6 +23,14 @@
         "description": "Оригинальная документация в Markdown",
         "url": "https://github.com/mikhama/async-race-api#usage"
       }
+    },
+    {
+      "name": "Engine",
+      "description": "Engine",
+      "externalDocs": {
+        "description": "Оригинальная документация в Markdown",
+        "url": "https://github.com/mikhama/async-race-api#usage"
+      }
     }
   ],
   "paths": {
@@ -366,6 +374,84 @@
           },
           "500": {
             "description": "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/engine": {
+      "patch": {
+        "tags": ["Engine"],
+        "summary": "Start / Stop Car's Engine",
+        "description": "Запускает или останавливает двигатель указанного автомобиля и возвращает его актуальную скорость и расстояние.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#start--stop-cars-engine"
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор автомобиля"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["started", "stopped"]
+            },
+            "description": "Статус двигателя"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ. Возвращает скорость и расстояние.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "velocity": {
+                      "type": "number",
+                      "description": "Скорость автомобиля",
+                      "example": 64
+                    },
+                    "distance": {
+                      "type": "number",
+                      "description": "Расстояние, которое проедет автомобиль",
+                      "example": 500000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (например, некорректные параметры)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wrong parameters: \"id\" should be any positive number, \"status\" should be \"started\", \"stopped\" or \"drive\""
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Автомобиль с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Car with such id was not found in the garage."
+                }
+              }
+            }
           }
         }
       }
