@@ -31,6 +31,14 @@
         "description": "Оригинальная документация в Markdown",
         "url": "https://github.com/mikhama/async-race-api#usage"
       }
+    },
+    {
+      "name": "Winners",
+      "description": "Winners",
+      "externalDocs": {
+        "description": "Оригинальная документация в Markdown",
+        "url": "https://github.com/mikhama/async-race-api#usage"
+      }
     }
   ],
   "paths": {
@@ -497,6 +505,99 @@
                     },
                     "engineBroken": {
                       "value": "Car has been stopped suddenly. It's engine was broken down."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/winners": {
+      "get": {
+        "tags": ["Winners"],
+        "summary": "Get Winners",
+        "description": "Возвращает JSON-данные о победителях.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#get-winners"
+        },
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Номер страницы (пагинация)"
+          },
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Количество записей на странице. Если передан, в ответе возвращается заголовок X-Total-Count с общим количеством записей."
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["id", "wins", "time"]
+            },
+            "description": "Поле для сортировки"
+          },
+          {
+            "name": "_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["ASC", "DESC"]
+            },
+            "description": "Порядок сортировки"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ. Возвращает массив победителей.",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Общее количество записей (возвращается только если передан параметр _limit)",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "Уникальный идентификатор победителя (ID автомобиля)",
+                        "example": 16
+                      },
+                      "wins": {
+                        "type": "integer",
+                        "description": "Количество побед",
+                        "example": 1
+                      },
+                      "time": {
+                        "type": "number",
+                        "description": "Лучшее время (в секундах)",
+                        "example": 2.92
+                      }
                     }
                   }
                 }
