@@ -745,6 +745,89 @@
           }
         }
       },
+      "put": {
+        "tags": ["Winners"],
+        "summary": "Update Winner",
+        "description": "Обновляет атрибуты указанного победителя.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#update-winner"
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Уникальный идентификатор победителя (ID автомобиля)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["wins", "time"],
+                "properties": {
+                  "wins": {
+                    "type": "integer",
+                    "description": "Количество побед",
+                    "example": 2
+                  },
+                  "time": {
+                    "type": "number",
+                    "description": "Лучшее время (в секундах)",
+                    "example": 11
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Запись о победителе успешно обновлена. Возвращает обновлённую запись.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "Уникальный идентификатор победителя (ID автомобиля)",
+                      "example": 16
+                    },
+                    "wins": {
+                      "type": "integer",
+                      "description": "Количество побед",
+                      "example": 2
+                    },
+                    "time": {
+                      "type": "number",
+                      "description": "Лучшее время (в секундах)",
+                      "example": 11
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Победитель с указанным ID не найден.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": ["Winners"],
         "summary": "Delete Winner",
