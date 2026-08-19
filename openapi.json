@@ -1,0 +1,14 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Документация API",
+    "description": "Документация API в виде SwaggerUI через конфиг OpenAPI 3.0",
+    "version": "2026.08.19"
+  },
+  "externalDocs": {
+    "description": "Документация API Async Race в Markdown",
+    "url": "https://github.com/rolling-scopes-school/tasks/blob/7799b83a7998f87e9bbbd8d4d5d92068aab5ca73/stage0.5%20Bootcamp/tasks/async-race/README.md"
+  },
+  "tags": [],
+  "paths": {}
+}
