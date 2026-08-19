@@ -6,8 +6,8 @@
     "version": "2026.08.19"
   },
   "externalDocs": {
-    "description": "Документация API Async Race в Markdown",
-    "url": "https://github.com/mikhama/async-race-api"
+    "description": "Оригинальная документация в Markdown",
+    "url": "https://github.com/mikhama/async-race-api#usage"
   },
   "servers": [
     {
@@ -18,7 +18,11 @@
   "tags": [
     {
       "name": "Garage",
-      "description": "Garagee"
+      "description": "Garage",
+      "externalDocs": {
+        "description": "Оригинальная документация в Markdown",
+        "url": "https://github.com/mikhama/async-race-api#usage"
+      }
     }
   ],
   "paths": {
@@ -27,6 +31,10 @@
         "tags": ["Garage"],
         "summary": "Get Cars",
         "description": "Возвращает JSON-данные об автомобилях в гараже.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#get-cars"
+        },
         "parameters": [
           {
             "name": "_page",
@@ -100,6 +108,10 @@
         "tags": ["Garage"],
         "summary": "Create Car",
         "description": "Создаёт новый автомобиль в гараже.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#create-car"
+        },
         "requestBody": {
           "required": true,
           "content": {
@@ -165,6 +177,10 @@
         "tags": ["Garage"],
         "summary": "Get Car",
         "description": "Возвращает JSON-данные об указанном автомобиле.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#get-car"
+        },
         "parameters": [
           {
             "name": "id",
@@ -221,6 +237,10 @@
         "tags": ["Garage"],
         "summary": "Update Car",
         "description": "Обновляет атрибуты указанного автомобиля.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#update-car"
+        },
         "parameters": [
           {
             "name": "id",
@@ -306,6 +326,10 @@
         "tags": ["Garage"],
         "summary": "Delete Car",
         "description": "Удаляет указанный автомобиль из гаража.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#delete-car"
+        },
         "parameters": [
           {
             "name": "id",
