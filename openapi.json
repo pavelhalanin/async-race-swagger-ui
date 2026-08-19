@@ -7,8 +7,95 @@
   },
   "externalDocs": {
     "description": "Документация API Async Race в Markdown",
-    "url": "https://github.com/rolling-scopes-school/tasks/blob/7799b83a7998f87e9bbbd8d4d5d92068aab5ca73/stage0.5%20Bootcamp/tasks/async-race/README.md"
+    "url": "https://github.com/mikhama/async-race-api"
   },
-  "tags": [],
-  "paths": {}
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Локальный backend сервер"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Garage",
+      "description": "Garagee"
+    }
+  ],
+  "paths": {
+    "/garage": {
+      "get": {
+        "tags": ["Garage"],
+        "summary": "Get Cars",
+        "description": "Возвращает JSON-данные об автомобилях в гараже.",
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Номер страницы (пагинация)"
+          },
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Количество записей на странице. Если передан, в ответе возвращается заголовок X-Total-Count с общим количеством записей."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ. Возвращает массив автомобилей.",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Общее количество записей (возвращается только если передан параметр _limit)",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Название автомобиля",
+                        "example": "Tesla"
+                      },
+                      "color": {
+                        "type": "string",
+                        "description": "Цвет автомобиля в HEX-формате",
+                        "example": "#e6e6fa"
+                      },
+                      "id": {
+                        "type": "integer",
+                        "description": "Уникальный идентификатор автомобиля",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (например, некорректные параметры)"
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    }
+  }
 }
