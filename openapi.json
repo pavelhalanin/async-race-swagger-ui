@@ -605,6 +605,83 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Winners"],
+        "summary": "Create Winner",
+        "description": "Создаёт новую запись о победителе.",
+        "externalDocs": {
+          "description": "Оригинальная документация в Markdown",
+          "url": "https://github.com/mikhama/async-race-api#create-winner"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id", "wins", "time"],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Уникальный идентификатор победителя (ID автомобиля)",
+                    "example": 109
+                  },
+                  "wins": {
+                    "type": "integer",
+                    "description": "Количество побед",
+                    "example": 1
+                  },
+                  "time": {
+                    "type": "number",
+                    "description": "Лучшее время (в секундах)",
+                    "example": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Запись о победителе успешно создана. Возвращает созданную запись.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "Уникальный идентификатор победителя (ID автомобиля)",
+                      "example": 109
+                    },
+                    "wins": {
+                      "type": "integer",
+                      "description": "Количество побед",
+                      "example": 1
+                    },
+                    "time": {
+                      "type": "number",
+                      "description": "Лучшее время (в секундах)",
+                      "example": 10
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера. Может возникнуть при попытке создать дублирующую запись.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: Insert failed, duplicate id"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/winners/{id}": {
