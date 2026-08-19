@@ -95,6 +95,69 @@
             "description": "Внутренняя ошибка сервера"
           }
         }
+      },
+      "post": {
+        "tags": ["Garage"],
+        "summary": "Create Car",
+        "description": "Создаёт новый автомобиль в гараже.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "color"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Название автомобиля",
+                    "example": "New Red Car"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Цвет автомобиля в HEX-формате",
+                    "example": "#ff0000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Автомобиль успешно создан. Возвращает данные созданного автомобиля.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Название автомобиля",
+                      "example": "New Red Car"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Цвет автомобиля в HEX-формате",
+                      "example": "#ff0000"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "Уникальный идентификатор созданного автомобиля",
+                      "example": 10
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (например, отсутствуют обязательные поля или некорректный формат данных)"
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера"
+          }
+        }
       }
     },
     "/garage/{id}": {
